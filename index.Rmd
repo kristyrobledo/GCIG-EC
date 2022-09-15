@@ -300,7 +300,7 @@ Konstantinopoulos PA, Luo W, et al. Phase II Study of Avelumab in Patients With 
 ]
 ---
 
-background-image: url("assets/taylor.JPG")
+background-image: url("assets/Taylor.JPG")
 background-position: 100% 50%
 background-size: 50% 50%
 
