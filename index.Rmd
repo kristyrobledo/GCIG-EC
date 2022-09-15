@@ -1,0 +1,453 @@
+---
+title: "Xaringan usyd theme"
+output:
+  xaringan::moon_reader:
+    css: ["default", "assets/sydney-fonts.css", "assets/sydney.css"]
+    self_contained: false # if true, fonts will be stored locally
+    seal: false # show a title slide with YAML information
+    includes:
+      in_header: "assets/mathjax-equation-numbers.html"
+    nature:
+      beforeInit: ["assets/remark-zoom.js", "https://platform.twitter.com/widgets.js"]
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9' # alternatives '16:9' or '4:3' or others e.g. 13:9
+      navigation:
+        scroll: false # disable slide transitions by scrolling
+---
+
+```{r, load_refs, echo=FALSE, cache=FALSE, message=FALSE}
+library(RefManageR)
+library(icons)
+library(readxl)
+library(tidyverse)
+library(patchwork)
+library(DT)
+
+knitr::opts_chunk$set(
+  fig.asp = 9/16,
+  fig.align = 'center',
+  echo = F,
+  out.width = "95%",
+  dpi= 300)
+ 
+top_icon = function(x) {
+  icons::icon_style(
+    icons::fontawesome(x),
+    position = "fixed", top = 10, right = 10
+  )
+}
+```
+
+class: title-slide
+background-image: url("assets/title-image2.jpg")
+background-position:  100% 50%
+background-size: 100% 100%
+
+# .text-shadow[.black[Statisticial conundrums in classifying patients with <br> PD-L1 expression in endometrial cancer]]
+<br><br><br><br><br><br><br><br><br>
+### .text-shadow[.white[<br><br><br> &nbsp;Dr Kristy Robledo <br> `r icon_style(fontawesome("twitter"), fill="blue")` @kristyrobledo]]
+
+---
+class: sydney-blue
+
+# Overview `r top_icon("list")`
+
+.font160[
+- what is PD-L1?
+- how is it measured?
+- how reliable are the measurements?
+- methods to classify "high" vs "low" expression
+- what has been performed to date in EC?
+]
+ 
+???
+inter-observer reliability of PD-L1
+
+---
+background-image: url("assets/pdl1.jpg")
+background-position:  100% 50%
+background-size: 100% 100%
+
+
+.footnote[
+Courtesy: [cancer.gov](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/immune-checkpoint-inhibitor)
+]
+
+???
+A protein that acts as a kind of “brake” to keep the body’s immune responses under control. PD-L1 may be found on some normal cells and in higher-than-normal amounts on some types of cancer cells. When PD-L1 binds to another protein called PD-1 (a protein found on T cells), it keeps T cells from killing the PD-L1-containing cells, including the cancer cells (left panel). 
+
+Anticancer drugs called immune checkpoint inhibitors bind to PD-L1 and block its binding to PD-1. This releases the “brakes” on the immune system and leaves T cells free to kill cancer cells (right panel).
+
+
+---
+background-image: url("assets/pdl1_staining.jpg")
+background-position:  100% 50%
+background-size: 100% 100%
+
+class: center, middle
+
+.footnote[
+Akhtar, M., Rashid, S. & Al-Bozom, I.A. PD−L1 immunostaining: what pathologists need to know. Diagn Pathol 16, 94 (2021). [https://doi.org/10.1186/s13000-021-01151-x](https://doi.org/10.1186/s13000-021-01151-x)
+]
+--
+
+.content-box-red[
+# Doesnt sound so hard??
+]
+
+???
+Case of metastatic pulmonary adenocarcinoma to the liver. B Immunohistochemical staining for tumor cells, moderate to intense staining (2+-3+) for PD-L1 TPS: 90 (DAKO 22C3 antibody)
+---
+
+background-image: url("assets/fig_assays2020.jpg")
+background-position:  100% 50%
+background-size: 100% 100%
+
+.footnote[
+Twomey, J.D., Zhang, B. Cancer Immunotherapy Update: FDA-Approved Checkpoint Inhibitors and Companion Diagnostics. AAPS J 23, 39 (2021). [https://doi.org/10.1208/s12248-021-00574-0](https://doi.org/10.1208/s12248-021-00574-0)
+]
+
+???
+
+FDA approvals of PD-1/PD-L1 mAbs. As of December 2020, six anti-PD-1/PD-L1 mAbs have been approved with supplemental indications across 19 cancer types and two tissue-agnostic conditions. Shown are the approvals for each cancer indication, for Keytruda (pembrolizumab), Opdivo (nivolumab), Libtayo (cemiplimab), Tecentriq (atezolizumab), Bavencio (avelumab), and Imfinzi (durvalumab). Multiple approvals for a cancer indication within the same year are shown with only one symbol. The open symbols represent approvals without a biomarker (no BM). The full symbols represent approvals that incorporate a biomarker with an associated threshold for each indication (BM), which was measured using either a central laboratory test or complementary diagnostic that was not approved as a CDx for the drug. Symbols with a red outline represent approvals in which a companion diagnostic is indicated for biomarker measurement (BM + CDx). *: approval for MSI-H/dMMR colorectal cancer. PM, pleural mesothelioma; TNBC, triple-negative breast cancer; CSCC, cutaneous squamous cell carcinoma; TMB-H, tumor mutation burden high; CRC, colorectal cancer; BCG-BC, Bacillus Calmette-Guérin bladder cancer; EC, endometrial carcinoma; ESCC, esophageal squamous cell carcinoma; SCLC, small cell lung cancer; RCC, renal cell carcinoma; MCC, Merkel cell carcinoma; HCC, hepatocellular carcinoma; PMBCL, primary mediastinal large B cell lymphoma; CC, cervical cancer; GC, gastric cancer; MSI-H, microsatellite instability high; dMMR, mismatch repair-deficient; UC, urothelial carcinoma; cHL, classical Hodgkin’s lymphoma; HNSCC, head and neck squamous cell carcinoma; NSCLC, non-small cell lung cancer. Information on approvals and supplemental approvals was gathered from Drugs@FDA
+
+- by pathologists
+- by immunohistochemistry (IHC)
+- for each immune check-point inhibitor, however, a separate immunohistochemistry (IHC) PD-L1 assay has been developed. 
+- In lung cancer, the 4 primary immune checkpoint inhibitors each have a different assay 
+- agreement between these assays ranges from poor to high
+
+---
+
+# Measuring PD-L1 depends on the assay
+
+- tumour cells (TC)
+- tumor infiltrating immune cells (IC)
+- presence of tumor associated immune cells (ICP) 
+- tumour proportion score (TPS) - percentage of TC 
+- combined proportion score (CPS)
+- .... and others
+
+???
+ Tumor proportion score (TPS) measured the membranous staining of tumors cells and is reported as a percentage of the total viable tumor cells.
+ Combined proportion score (CPS) measures the membranous staining of tumor cells, lymphocytes, and macrophages and is reported as a percentage of the total viable tumor cells and multiplied by 100. PD-L1 percentage (as measured by the 28-8 pharmDx) reports the number of tumor cells with complete circumferential or partial linear plasma membrane staining of PDL1 out of 100 viable tumor cells. IC and TC measure the proportion of tumor area occupied by PD-L1 expressing tumor-infiltrating immune cells (IC) or the percentage of PD-L1-positive tumor cells (TC) and is reported as a percentage of the tumor area. The percentage of immune cells present (ICP) is reported as the percentage of tumor area occupied by any tumor-associated immune cells.
+
+
+---
+background-image: url("assets/pdl1_criteria.jpg")
+background-position:  50% 50%
+background-size: 60% 100%
+
+
+.footnote[
+Twomey, J.D., Zhang, B. Cancer Immunotherapy Update: FDA-Approved Checkpoint Inhibitors and Companion Diagnostics. AAPS J 23, 39 (2021). [https://doi.org/10.1208/s12248-021-00574-0](https://doi.org/10.1208/s12248-021-00574-0)
+]
+
+???
+companion diagnostic device is required for the therapeutic product’s safe and effective use, a complementary test is performed to provide information that is clinically meaningful and will aid in the decision regarding treatment
+
+---
+
+background-image: url("assets/keepcalm.png")
+background-position: 100% 50%
+background-size: 50% 75%
+
+
+.pull-left[
+
+#  `r fontawesome("eye")` `r fontawesome("search")`
+
+.content-box-blue[
+- lots of assays
+
+- different criteria of "high" PD-L1 for each indication/disease
+
+- tumour heterogeneity
+
+]
+]
+
+--
+
+.content-box-red[.center[
+# Now, what about measurement error?
+]
+]
+???
+ As described above, the use of PD-L1 as a predictive biomarker to identify those patients who are most likely to benefit from ICI treatment remains difficult due to different assays used for each therapeutic, difference in threshold cutoffs across indications, tumor heterogeneity within and across patient populations, the diversity of patients’ treatment history, and the dynamic status of the tumor microenvironment. Perhaps a single-parameter biomarker (e.g., PD-L1) may not be sufficient to accurately stratify patients for ICI therapy...
+
+---
+background-image: url("assets/jitc-2021-June-9-6--F2.large.jpg")
+background-position: 100% 50%
+background-size: 50% 75%
+
+# PHAEDRA: phase II single arm trial
+
+.pull-left[
+
+- 71 Australian women received durvalumab  
+- 36 deficient MMR and 35 proficient MMR patients
+- OTR was 47% (17/36, 95% CI: 32 to 63%) in dMMR
+- including 6 complete responses and 11 partial responses (PR)
+- OTR was 3% in pMMR cohort (1/35, 95% CI: 1 to 15%); 1 PR
+]
+
+.footnote[
+Antill Y, Kok P, Robledo K on behalf of the Australia New Zealand Gynaecological Oncology Group (ANZGOG), et al. Clinical activity of durvalumab for patients with advanced mismatch repair-deficient and repair-proficient endometrial cancer. A nonrandomized phase 2 clinical trial. Journal for ImmunoTherapy of Cancer 2021;9:e002255. doi: 10.1136/jitc-2020-002255
+]
+
+---
+
+```{r, echo=FALSE, message=FALSE}
+
+##updated data
+df <- read_excel("Y://Statistics//1 STUDIES//Oncology//ANZGOG//PHAEDRA//8.9 Substudies//PDL1//Data//PD-L1 Final Original scores V2 DS.xlsx")
+
+
+df2<-df %>%
+  na.omit() %>%
+  rowwise() %>%
+  mutate(tcp1 = as.numeric(`DS - Tumour cells positive`),
+         tcp2 = as.numeric(`CS - Tumour cells positive`),
+         tcp_av = mean(c(tcp1, tcp2)),
+         tcp_diff = tcp1-tcp2,
+         icp1 = as.numeric(`DS - ICP`),
+         icp2=as.numeric(`CS - ICP`),
+         icp_av = mean(c(icp1, icp2)),
+         icp_diff = icp1-icp2,
+         immune1 = as.numeric(`DS - Immune cells positive`),
+         immune2=as.numeric(`CS - Immune cells positive`),
+         immune_av = mean(c(immune1, immune2)),
+         immune_diff = immune1-immune2)
+
+df2 %>%
+  ggplot(aes(y=tcp_diff, x=tcp_av))+
+  geom_point()+
+  labs(x="TC average", y="Difference in TC") +
+  scale_y_continuous(limits = c(-20,20))+
+  theme_bw()->tcp
+
+df2 %>%
+  ggplot(aes(y=icp_diff, x=icp_av))+
+  geom_point()+
+  labs(x="ICP average", y="Difference in ICP")+
+  scale_y_continuous(limits = c(-20,20))+
+  theme_bw()->icp
+
+df2 %>%
+  ggplot(aes(y=immune_diff, x=immune_av))+
+  geom_point()+
+  labs(x="IC average", y="Difference in IC")+
+  scale_y_continuous(limits = c(-100,100))+
+  theme_bw()->ic
+
+
+fig1<-tcp+icp+ic+plot_annotation(tag_levels = 'a')
+fig1
+```
+
+.footnote[
+(paper under review)
+]
+---
+# Methods for determining cutpoints 
+
+.font140[
+- clinical decision 
+- use what others have used in different disease type
+- minimum p-value^ 
+- top left point of the ROC curve (closest to 0,1)
+- Youdin index (sensitivity + specificity - 1)
+- ... the list goes on, with a total of 34 methods in the `OptimalCutpoints` `R` package alone*
+]
+.footnote[
+*López-Ratón, M., Rodríguez-Álvarez, M. X., Cadarso-Suárez, C., & Gude-Sampedro, F. (2014). OptimalCutpoints: An R Package for Selecting Optimal Cutpoints in Diagnostic Tests. Journal of Statistical Software, 61(8), 1–36. [https://doi.org/10.18637/jss.v061.i08](https://doi.org/10.18637/jss.v061.i08) <br>
+^Altman DG, Lausen B, Sauerbrei W, Schumacher M. Dangers of using "optimal" cutpoints in the evaluation of prognostic factors. J Natl Cancer Inst. 1994 Jun 1;86(11):829-35. doi: 10.1093/jnci/86.11.829. PMID: 8182763.
+]
+---
+class: middle, center, sydney-blue
+
+
+# Review of PD-L1 work in Endometrial Cancer
+
+---
+
+background-image: url("assets/Konstantinopoulos.jpg")
+background-position: 50% 50%
+background-size: 70% 70%
+
+# PD-L1 in endometrial cancer (#1)
+
+
+.footnote[
+Konstantinopoulos PA, Luo W, et al. Phase II Study of Avelumab in Patients With Mismatch Repair Deficient and Mismatch Repair Proficient Recurrent/Persistent Endometrial Cancer. J Clin Oncol. 2019 Oct 20;37(30):2786-2794. doi: 10.1200/JCO.19.01021. Epub 2019 Aug 28. PMID: 31461377.
+]
+---
+
+background-image: url("assets/taylor.jpg")
+background-position: 100% 50%
+background-size: 50% 50%
+
+# PD-L1 in endometrial cancer (#2)
+
+
+.pull-left[
+
+.blockquote[For patients with RCC, SCCHN, endometrial cancer, urothelial cancer and melanoma, PD-L1 status was determined using an investigational version of the PD-L1 immunohistochemistry 22C3 pharmDx assay and a provisional combined positive score, which is defined as the number of PD-L1–staining cells (tumor cells, lymphocytes, macrophages) divided by the total number of viable tumor cells, multiplied by 100.]
+]
+
+
+.footnote[
+Taylor MH, Lee CH, Makker V, Rasco D, Dutcus CE, Wu J, Stepan DE, Shumaker RC, Motzer RJ. Phase IB/II Trial of Lenvatinib Plus Pembrolizumab in Patients With Advanced Renal Cell Carcinoma, Endometrial Cancer, and Other Selected Advanced Solid Tumors. J Clin Oncol. 2020 Apr 10;38(11):1154-1163. doi: 10.1200/JCO.19.01598. Epub 2020 Jan 21. Erratum in: J Clin Oncol. 2020 Aug 10;38(23):2702. PMID: 31961766; PMCID: PMC7145588.
+]
+---
+background-image: url("assets/ott.jpg")
+background-position: 0% 50%
+background-size: 50% 50%
+
+# PD-L1 in endometrial cancer (#3)
+
+.pull-right[
+<br>
+.blockquote[
+Statistical testing in a regression meta-analysis confirmed significant associations between PD-L1 CPS and both ORR (P = .018) and PFS (P = .005). The T-cell–inflamed GEP and PD-L1 CPS demonstrated a moderate, but highly statistically significant, association (r = 0.40; P < .001) across 151 patients
+]]
+
+
+.footnote[
+Ott PA, Bang YJ, Piha-Paul SA, Razak ARA, Bennouna J, Soria JC, Rugo HS, Cohen RB, O'Neil BH, Mehnert JM, Lopez J, Doi T, van Brummelen EMJ, Cristescu R, Yang P, Emancipator K, Stein K, Ayers M, Joe AK, Lunceford JK. T-Cell-Inflamed Gene-Expression Profile, Programmed Death Ligand 1 Expression, and Tumor Mutational Burden Predict Efficacy in Patients Treated With Pembrolizumab Across 20 Cancers: KEYNOTE-028. J Clin Oncol. 2019 Feb 1;37(4):318-327. doi: 10.1200/JCO.2018.78.2276. Epub 2018 Dec 13. PMID: 30557521.
+]
+
+---
+background-image: url("assets/watch.png")
+background-position: 50% 60%
+background-size: 60% 70%
+
+# Phaedra ?
+
+---
+background-image: url("assets/phaedra.jpg")
+background-position: 50% 40%
+background-size: 80% 90%
+
+.footnote[
+TC+: tumor cells with positive staining, ICP: percentage of tumor area occupied by immune cells, IC+: percentage of tumor-associated immune cells with positive staining
+*Within all patients above or below the cut point
+†Urothelial cancer (UC) algorithm: TC+ ≥ 25% OR ICP>1& IC+ ≥ 25 OR ICP = 1 & IC+ = 100
+‡Optimal cut point (OC) algorithm: TC+ ≥ 1 OR ICP ≥ 10 OR IC+ ≥ 35
+
+]
+---
+background-image: url("assets/phaedra_models.jpg")
+background-position: 50% 100%
+background-size: 60% 50%
+
+# PHAEDRA: correlation with response
+
+- cutpoints determined as most top left point on ROC curve
+- each score assessed separately, then 'any' of the scores
+- compared to Ventana UC algorithm and MMR status (def vs prof)
+- most relationships with response were no longer evident after adjustment for MMR status
+- no relationships with PFS/OS remained after adjustment for MMR status
+
+??? 
+MMR is another biomarker -> is it MMR or PD-L1
+other biomarkers that are not measured
+account 
+
+---
+# RECAP: Endometrial cancer
+
+```{r}
+##updated data
+df <- read_excel("compare.xlsx")
+
+
+df %>%
+  DT::datatable(df, rownames=F) %>%
+  DT::formatStyle(columns = c(F,F,F,F,F,F,T), fontSize = '70%')
+```
+???
+- Konstantinopoulos: Avelumab; 22C3 assay; n=25; TPS>=1 plus another analysis by CPS > ?; all responses in PD-L1 NEGATIVE
+
+- Taylor: Lenvatinib Plus Pembrolizumab; 22C3 assay; n=23; CPS > ?, no difference in response rates; ? difference in PFS
+
+- Ott: Pembrolizumab; 22C3 assay; n=10 with PD-L1 data; continuous CPS; with all other tumours gave relationship with response and PFS
+
+- PHAEDRA: durvalumab; SP263 assay; n=67; MMR status has stronger relationship with PD-L1?
+
+---
+class: sydney-blue
+
+# PD-L1 take home messages/questions
+
+* different assays, different cutpoints -> modest correlation with outcome?
+
+--
+
+* consider inter-observer reliability (both across and within assays)
+
+--
+
+* importance of classification of PD-L1 status not by apriori... by statistical methods at trial completion? which of the 34 methods? adjust for the multiple comparisons if minimum p-value? 
+
+--
+
+* PD-L1 in isolation -possibly not as strong as seen in other disease types?
+
+--
+
+* need to also measure MMR
+
+* combined with MMR status ->factorial design?
+
+
+---
+class: center
+
+background-image: url("assets/collaboration.jpg")
+background-position: 100% 80%
+background-size: 100% 90%
+
+# Take home message
+
+
+
+???
+the use of PD-L1 as a predictive biomarker to identify those patients who are most likely to benefit from ICI treatment remains difficult due to different assays used for each therapeutic, difference in threshold cutoffs across indications, tumor heterogeneity within and across patient populations, the diversity of patients’ treatment history, and the dynamic status of the tumor microenvironment. Perhaps a single-parameter biomarker (e.g., PD-L1) may not be sufficient to accurately stratify patients for ICI therapy...
+I believe we need a collaboration like the BLUEPRINT project in NSCLC; a combination of academia and industry to focus on EC and PD-L1
+
+---
+class: sydney-blue
+background-image: url(assets/USydLogo-white.svg),url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+background-size: 260px,100px
+background-position: 5% 95%,4% 70%
+
+
+# Thanks!
+
+.pull-right[.pull-down[
+
+<a href="mailto:kristy.robledo@sydney.edu.au">
+.white[`r icons::fontawesome("paper-plane")` kristy.robledo@sydney.edu.au]
+</a>
+
+<a href="https://github.com/kristyrobledo/talks">
+.white[`r icons::fontawesome("link")` github.com/kristyrobledo/talks]
+</a>
+
+<a href="http://twitter.com/garthtarr">
+.white[`r icons::fontawesome("twitter")` @kristyrobledo]
+</a>
+
+<a href="http://github.com/garthtarr">
+.white[`r icons::fontawesome("github")` @kristyrobledo]
+</a>
+
+<br><br><br>
+]]
+
+???
+sharingan
