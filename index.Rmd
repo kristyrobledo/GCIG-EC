@@ -82,7 +82,7 @@ Anticancer drugs called immune checkpoint inhibitors bind to PD-L1 and block its
 
 
 ---
-background-image: url("assets/pdl1_staining.jpg")
+background-image: url("assets/pdl1staining.jpg")
 background-position:  100% 50%
 background-size: 100% 100%
 
