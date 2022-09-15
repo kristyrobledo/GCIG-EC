@@ -1,5 +1,5 @@
 ---
-title: "Xaringan usyd theme"
+title: "GCIG: PDL-1 in Endometrial Cancer"
 output:
   xaringan::moon_reader:
     css: ["default", "assets/sydney-fonts.css", "assets/sydney.css"]
