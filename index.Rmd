@@ -434,15 +434,15 @@ background-position: 5% 95%,4% 70%
 .white[`r icons::fontawesome("paper-plane")` kristy.robledo@sydney.edu.au]
 </a>
 
-<a href="https://github.com/kristyrobledo/talks">
-.white[`r icons::fontawesome("link")` github.com/kristyrobledo/talks]
+<a href="https://kristyrobledo.github.io/GCIG-EC/">
+.white[`r icons::fontawesome("link")` kristyrobledo.github.io/GCIG-EC/]
 </a>
 
-<a href="http://twitter.com/garthtarr">
+<a href="http://twitter.com/kristyrobledo">
 .white[`r icons::fontawesome("twitter")` @kristyrobledo]
 </a>
 
-<a href="http://github.com/garthtarr">
+<a href="http://github.com/kristyrobledo">
 .white[`r icons::fontawesome("github")` @kristyrobledo]
 </a>
 
